@@ -1,10 +1,16 @@
 // ****************************************************************
 // * Nom ................ Happy St                                *
 // * Programmeur ........ Jean Monos                              *
-// * Data mise à jour.... 10/02/2020                              *
+// * Data mise à jour.... 11/02/2020                              *
 // * Fonction ........... Fonction dev pour Atari Ste GCC mint    *
 // ****************************************************************
+/*
+11/02/2020 : Ajout de l'argument couleurs dans le draw_text();
 
+
+
+
+*/
 
 #ifndef HAPPST_H
 	#define  HAPPST_H
@@ -27,7 +33,7 @@
   void bip_clavier_off();
   void bip_clavier_on();
 
-  void draw_text(unsigned char position_x,unsigned char position_y,char* texte);
+  void draw_text(unsigned char position_x,unsigned char position_y,char* texte,unsigned char couleur);
 
   // ==========================================
   // * Signature divers hors fonction directe *
