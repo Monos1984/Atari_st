@@ -1,7 +1,7 @@
 // ****************************************************************
 // * Nom ................ Happy St                                *
 // * Programmeur ........ Jean Monos                              *
-// * Data mise à jour.... 10/02/2020                              *
+// * Data mise à jour.... 11/02/2020                              *
 // * Fonction ........... Fonction dev pour Atari Ste GCC mint    *
 // ****************************************************************
 
@@ -146,8 +146,9 @@ short get_keyboard()
 // ====================
 // * Afficher du text *
 // ====================
-void draw_text(unsigned char position_x,unsigned char position_y,char* texte)
+void draw_text(unsigned char position_x,unsigned char position_y,char* texte,unsigned char couleur)
 {
   printf( CURS_LOC, 32+position_y, 32+position_x ); fflush(stdout);
+  printf(CHAR_COLOR , couleur);fflush(stdout);
   Cconws(texte);
 }
