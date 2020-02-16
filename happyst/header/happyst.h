@@ -1,10 +1,12 @@
 // ****************************************************************
 // * Nom ................ Happy St                                *
 // * Programmeur ........ Jean Monos                              *
-// * Data mise à jour.... 11/02/2020                              *
+// * Data mise à jour.... 16/02/2020                              *
 // * Fonction ........... Fonction dev pour Atari Ste GCC mint    *
 // ****************************************************************
 /*
+16/02/2020 : Contrôle si le fichier pi est ouvert
+12/02/2020 : ajout de define Mode video et Wait_key
 11/02/2020 : Ajout de l'argument couleurs dans le draw_text();
 
 
@@ -34,6 +36,22 @@
   void bip_clavier_on();
 
   void draw_text(unsigned char position_x,unsigned char position_y,char* texte,unsigned char couleur);
+  void draw_error(int id_error); // Afficher les erreurs
+
+
+  // ======================
+  // * Define de fonction *
+  // ======================
+  #define WAIT_KEY Cconin() // Attendre qu'une touche est utilisé
+  #define MOUSSE_OFF v_hide_c(1); // Cache la sourie
+  
+  // -------------------------
+  // * Configuration de mode *
+  // -------------------------
+  #define SET_MODE_LOWRES Setscreen(Physbase(),Logbase(),0)
+  #define SET_MODE_MEDRES Setscreen(Physbase(),Logbase(),1)
+  #define SET_MODE_HIRES Setscreen(Physbase(),Logbase(),2)
+  
 
   // ==========================================
   // * Signature divers hors fonction directe *
