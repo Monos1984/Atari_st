@@ -1,7 +1,7 @@
 // ****************************************************************
 // * Nom ................ Happy St                                *
 // * Programmeur ........ Jean Monos                              *
-// * Data mise à jour.... 11/02/2020                              *
+// * Data mise à jour.... 16/02/2020                              *
 // * Fonction ........... Fonction dev pour Atari Ste GCC mint    *
 // ****************************************************************
 
@@ -9,7 +9,7 @@
 // ====================
 // * Fichier includes *
 // ====================
-// #include "header/include.h"
+
 #include "header/happyst.h"
 
 
@@ -97,22 +97,27 @@ void restore_init_st()
 // ================
 void load_picture(char* name)
 {
-  unsigned char id_image;
+signed int f_handles;
+
+
+
   // -------------------------
   // * Chargement de l'image *
   // -------------------------
   
-  id_image = Fopen(name,0);
+  f_handles = Fopen(name,0);
   
+  if (f_handles >= 0)
+  {
   // -------------------------------
   // * Placer les donnés en buffer *
   // -------------------------------
-  Fread(id_image,32034,picture_buffer);
-
+  // Fread(f_handles,32034,picture_buffer);
+Fread(f_handles,32034,picture_buffer);
   // ---------------------
   // * Fermer le fichier *
   // ---------------------
-  Fclose(id_image);
+  Fclose(f_handles);
 
   // ------------------------------------------
   // * Configuration de la palette de couleur *
@@ -122,8 +127,35 @@ void load_picture(char* name)
   // ---------------------------------------
   // * Afficher l'image à l'écran physique *
   // ---------------------------------------
-  memcpy(Physbase(),picture_buffer+34,32034-34);
+  memcpy(Physbase() ,(picture_buffer)+34,32034-34);
+  }
+  else
+  {
+     
+    draw_error(f_handles);
+
+  }
+
+
 }
+
+
+// ===============
+// * Draw_Erreur *
+// ===============
+void draw_error(int id_error)
+{
+
+    switch (id_error)
+    {
+
+      case -33 :  draw_text(0,0,"Fichier Non trouver",1); break;
+      case -34 :  draw_text(0,0,"Chemin non trouver",1); break;
+    }
+
+
+}
+
 
 
 // ================
@@ -133,13 +165,16 @@ void load_picture(char* name)
 short get_keyboard()
 {
   short id_key;
+  
 
   if(Cconis()!= 0)
   {     
     id_key = Crawcin()>>16; 
+   
+
   }
 
-  // Vsync();
+ 
   return id_key;
 }
 
