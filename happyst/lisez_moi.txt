@@ -1,0 +1,23 @@
+****************************
+**			  **
+**   	Happy St          **
+**                        **
+****************************
+
+=====================================
+Auteur .............: Jean Monos
+Mise à jour.........: 17/02/2020
+Licence ............: CC By SA
+Cible ..............: Atari St(e)
+Compilateur ........: GCC
+=====================================
+
+
+------------------
+1 : Introduction
+------------------
+
+Happy St est une petite bibliotheque en construction de fonction utile pour programmer l'atar st.
+Il est prévu pour fonctionner avec m68k-atari-mint cross-tools de GCC (version 4.0 a mon utilisation).
+
+Happy St est en licence CC BY SA. (Autorisé dans les projets commerciaux)
