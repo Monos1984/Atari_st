@@ -1,8 +1,9 @@
 // ****************************************************************
 // * Nom ................ Happy St                                *
 // * Programmeur ........ Jean Monos                              *
-// * Data mise à jour.... 16/02/2020                              *
+// * Data mise à jour.... 17/02/2020                              *
 // * Fonction ........... Fonction dev pour Atari Ste GCC mint    *
+// * Licence ............ CC-BY-SA                                *
 // ****************************************************************
 
 
@@ -91,6 +92,41 @@ void restore_init_st()
   Setpalette(Save_Buffer_Palette);
   Vsync();
 }
+
+
+// ===============
+// * load_data() *
+// ===============
+
+void load_data(char* source,char* destination,long size)
+{
+signed int f_handles;
+
+  // -------------------------
+  // * Ouverture du fichier  *
+  // -------------------------
+  
+  f_handles = Fopen(source,0);
+  
+  if (f_handles >= 0)
+  {
+  // ----------------------------------------------
+  // * Placer les donnés en dans le buffer tilset *
+  // ----------------------------------------------
+  Fread(f_handles,size,destination);
+  // ---------------------
+  // * Fermer le fichier *
+  // ---------------------
+  Fclose(f_handles);
+  }
+  else
+  {    
+    draw_error(f_handles);
+  }
+}
+
+
+
 
 // ================
 // * Load Picture *

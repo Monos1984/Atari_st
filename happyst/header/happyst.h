@@ -3,14 +3,15 @@
 // * Programmeur ........ Jean Monos                              *
 // * Data mise à jour.... 16/02/2020                              *
 // * Fonction ........... Fonction dev pour Atari Ste GCC mint    *
+// * Licence ............ CC-BY-SA                                *
 // ****************************************************************
+
+
 /*
-16/02/2020 : Contrôle si le fichier pi est ouvert
-12/02/2020 : ajout de define Mode video et Wait_key
-11/02/2020 : Ajout de l'argument couleurs dans le draw_text();
-
-
-
+  17/02/2020 : Ajout du chargement de fichier "Data" dans un buffer choisis.
+  16/02/2020 : Contrôle si le fichier pi est ouvert
+  12/02/2020 : ajout de define Mode video et Wait_key
+  11/02/2020 : Ajout de l'argument couleurs dans le draw_text();
 
 */
 
@@ -30,12 +31,12 @@
 
   void save_init_st(); // Sauvegarder les données ecran 
   void restore_init_st();// Restorer les données ecran
-  short get_keyboard();
-  void load_picture(char* name);
-  void bip_clavier_off();
-  void bip_clavier_on();
-
-  void draw_text(unsigned char position_x,unsigned char position_y,char* texte,unsigned char couleur);
+  short get_keyboard();// Récupérer les touches du buffer (A améliorer)
+  void load_picture(char* name); // Charge et place une image PC1 dans la mémoire vidéo.
+  void bip_clavier_off(); // Desactive le bip sonore des touches
+  void bip_clavier_on(); // Active le bip sonore des touches
+  void load_data(char* source,char* destination,long size); // Charge un fichier dans le buffer de votre choix
+  void draw_text(unsigned char position_x,unsigned char position_y,char* texte,unsigned char couleur); // Affiche un text
   void draw_error(int id_error); // Afficher les erreurs
 
 
@@ -48,9 +49,9 @@
   // -------------------------
   // * Configuration de mode *
   // -------------------------
-  #define SET_MODE_LOWRES Setscreen(Physbase(),Logbase(),0)
-  #define SET_MODE_MEDRES Setscreen(Physbase(),Logbase(),1)
-  #define SET_MODE_HIRES Setscreen(Physbase(),Logbase(),2)
+  #define SET_MODE_LOWRES       Setscreen(Physbase(),Logbase(),0)
+  #define SET_MODE_MEDRES       Setscreen(Physbase(),Logbase(),1)
+  #define SET_MODE_HIRES        Setscreen(Physbase(),Logbase(),2)
   
 
   // ==========================================
@@ -58,6 +59,8 @@
   // ==========================================
   void clavier_off();
   void clavier_on();
+
+
   // ==================
   // * Define keybord *
   // ==================
