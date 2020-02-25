@@ -6,7 +6,7 @@
 
 =====================================
 Auteur .............: Jean Monos
-Mise à jour.........: 17/02/2020
+Mise à jour.........: 25/02/2020
 Licence ............: CC By SA
 Cible ..............: Atari St(e)
 Compilateur ........: GCC
@@ -21,3 +21,9 @@ Happy St est une petite bibliotheque en construction de fonction utile pour prog
 Il est prévu pour fonctionner avec m68k-atari-mint cross-tools de GCC (version 4.0 a mon utilisation).
 
 Happy St est en licence CC BY SA. (Autorisé dans les projets commerciaux)
+
+------------------
+2 : Mise à jour
+------------------
+* 25/02/2020
+	Dans data_load(...), il est possible de copier dans le buffer le fichier complet sans connaitre la taille du fichier avec un -1 dans le paramètre size.

@@ -1,7 +1,7 @@
 // ****************************************************************
 // * Nom ................ Happy St                                *
 // * Programmeur ........ Jean Monos                              *
-// * Data mise à jour.... 17/02/2020                              *
+// * Data mise à jour.... 25/02/2020                              *
 // * Fonction ........... Fonction dev pour Atari Ste GCC mint    *
 // * Licence ............ CC-BY-SA                                *
 // ****************************************************************
@@ -21,8 +21,6 @@ long* Save_Ecran_Phys;
 long* Save_Ecran_Log;
 int   Save_Ecran_Mode_Video;
 short Save_Buffer_Palette[16];
-unsigned char picture_buffer[32034];
-
 
 
 // ===================
@@ -56,6 +54,8 @@ void clavier_on()
 
 
 
+
+
 // ================
 // * save_init_st *
 // ================
@@ -78,7 +78,7 @@ void save_init_st()
   // -------------------------------------
   for (i=0;i<16;i++)
   {
-    Save_Buffer_Palette[i] = Setcolor(i,-1);
+    *(Save_Buffer_Palette+i) = Setcolor(i,-1);
   }
 
 }
@@ -100,29 +100,57 @@ void restore_init_st()
 
 void load_data(char* source,char* destination,long size)
 {
-signed int f_handles;
+  // -------------------------------------
+  // * Declaration des variables locales *
+  // -------------------------------------
+  signed int f_handles;
+  unsigned char buffer_dta[44];
 
   // -------------------------
   // * Ouverture du fichier  *
   // -------------------------
   
   f_handles = Fopen(source,0);
-  
+
+  // -------------------------------
+  // * Fichier correctement ouvert *
+  // -------------------------------
   if (f_handles >= 0)
   {
-  // ----------------------------------------------
-  // * Placer les donnés en dans le buffer tilset *
-  // ----------------------------------------------
-  Fread(f_handles,size,destination);
-  // ---------------------
-  // * Fermer le fichier *
-  // ---------------------
-  Fclose(f_handles);
+    // -----------------------------------------------
+    // * Calcule automatique de la taille du fichier *
+    // -----------------------------------------------
+    if (size==-1)
+    {
+      // -------------------------------
+      // * preparation des données dta *
+      // -------------------------------
+      Fsetdta(buffer_dta);
+      Fsfirst(source,0);
+
+      // ----------------------------------
+      // * Recuperer la taille du fichier *
+      // ----------------------------------
+   
+      size = *(buffer_dta+26)*1024+*(buffer_dta+27)*512+*(buffer_dta+28)*256+*(buffer_dta+29);
+     //  size = buffer_dta[26]*1024+buffer_dta[27]*512+buffer_dta[28]*256+buffer_dta[29];
+    }
+
+    // ----------------------------------------------
+    // * Placer les donnés en dans le buffer voulu  *
+    // ----------------------------------------------
+    Fread(f_handles,size,destination);
+    // ---------------------
+    // * Fermer le fichier *
+    // ---------------------
+    Fclose(f_handles);
   }
   else
   {    
     draw_error(f_handles);
   }
+
+
 }
 
 
@@ -133,8 +161,8 @@ signed int f_handles;
 // ================
 void load_picture(char* name)
 {
-signed int f_handles;
-
+  signed int f_handles;
+  unsigned char picture_buffer[32034];
 
 
   // -------------------------
@@ -149,7 +177,7 @@ signed int f_handles;
   // * Placer les donnés en buffer *
   // -------------------------------
   // Fread(f_handles,32034,picture_buffer);
-Fread(f_handles,32034,picture_buffer);
+  Fread(f_handles,32034,picture_buffer);
   // ---------------------
   // * Fermer le fichier *
   // ---------------------
@@ -163,7 +191,7 @@ Fread(f_handles,32034,picture_buffer);
   // ---------------------------------------
   // * Afficher l'image à l'écran physique *
   // ---------------------------------------
-  memcpy(Physbase() ,(picture_buffer)+34,32034-34);
+  memcpy(Physbase() ,(picture_buffer)+34,32000);
   }
   else
   {
@@ -207,7 +235,6 @@ short get_keyboard()
   {     
     id_key = Crawcin()>>16; 
    
-
   }
 
  

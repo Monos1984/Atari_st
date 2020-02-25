@@ -1,13 +1,14 @@
 // ****************************************************************
 // * Nom ................ Happy St                                *
 // * Programmeur ........ Jean Monos                              *
-// * Data mise à jour.... 16/02/2020                              *
+// * Data mise à jour.... 25/02/2020                              *
 // * Fonction ........... Fonction dev pour Atari Ste GCC mint    *
 // * Licence ............ CC-BY-SA                                *
 // ****************************************************************
 
 
 /*
+  25/02/2020 : Le Load Data peut calculer automatiquement la taille du fichier chargé avant l'envois dans le buffer. (-1)
   17/02/2020 : Ajout du chargement de fichier "Data" dans un buffer choisis.
   16/02/2020 : Contrôle si le fichier pi est ouvert
   12/02/2020 : ajout de define Mode video et Wait_key
@@ -35,7 +36,10 @@
   void load_picture(char* name); // Charge et place une image PC1 dans la mémoire vidéo.
   void bip_clavier_off(); // Desactive le bip sonore des touches
   void bip_clavier_on(); // Active le bip sonore des touches
-  void load_data(char* source,char* destination,long size); // Charge un fichier dans le buffer de votre choix
+  
+  // charge un fichier dans le buffer de votre choix. Si size = -1 alors c'est le fichier entier qui est copier
+  void load_data(char* source,char* destination,long size); 
+
   void draw_text(unsigned char position_x,unsigned char position_y,char* texte,unsigned char couleur); // Affiche un text
   void draw_error(int id_error); // Afficher les erreurs
 
