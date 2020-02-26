@@ -6,11 +6,15 @@
 
 =====================================
 Auteur .............: Jean Monos
-Mise à jour.........: 25/02/2020
+Mise à jour.........: 26/02/2020
 Licence ............: CC By SA
 Cible ..............: Atari St(e)
 Compilateur ........: GCC
+Remerciement .......: Anata, Vincent Riviere
+
 =====================================
+
+
 
 
 ------------------
@@ -25,5 +29,8 @@ Happy St est en licence CC BY SA. (Autorisé dans les projets commerciaux)
 ------------------
 2 : Mise à jour
 ------------------
+* 26/02/2020
+	Mise à jour du data_load en utilisant la structure prévus à cette effet du _dta.
+
 * 25/02/2020
 	Dans data_load(...), il est possible de copier dans le buffer le fichier complet sans connaitre la taille du fichier avec un -1 dans le paramètre size.

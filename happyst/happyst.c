@@ -1,7 +1,7 @@
 // ****************************************************************
 // * Nom ................ Happy St                                *
 // * Programmeur ........ Jean Monos                              *
-// * Data mise à jour.... 25/02/2020                              *
+// * Data mise à jour.... 26/02/2020                              *
 // * Fonction ........... Fonction dev pour Atari Ste GCC mint    *
 // * Licence ............ CC-BY-SA                                *
 // ****************************************************************
@@ -104,8 +104,8 @@ void load_data(char* source,char* destination,long size)
   // * Declaration des variables locales *
   // -------------------------------------
   signed int f_handles;
-  unsigned char buffer_dta[44];
-
+ // unsigned char buffer_dta[44];
+ _DTA dta;
   // -------------------------
   // * Ouverture du fichier  *
   // -------------------------
@@ -125,15 +125,19 @@ void load_data(char* source,char* destination,long size)
       // -------------------------------
       // * preparation des données dta *
       // -------------------------------
-      Fsetdta(buffer_dta);
-      Fsfirst(source,0);
+    //  Fsetdta(buffer_dta);
+      Fsetdta(&dta);
+    Fsfirst(source,0);
 
       // ----------------------------------
       // * Recuperer la taille du fichier *
       // ----------------------------------
    
-      size = *(buffer_dta+26)*1024+*(buffer_dta+27)*512+*(buffer_dta+28)*256+*(buffer_dta+29);
-     //  size = buffer_dta[26]*1024+buffer_dta[27]*512+buffer_dta[28]*256+buffer_dta[29];
+  //    size = *(buffer_dta+26)*1024+*(buffer_dta+27)*512+*(buffer_dta+28)*256+*(buffer_dta+29);
+ size = dta.dta_size;    
+
+
+ //  size = buffer_dta[26]*1024+buffer_dta[27]*512+buffer_dta[28]*256+buffer_dta[29];
     }
 
     // ----------------------------------------------
