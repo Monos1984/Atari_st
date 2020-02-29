@@ -6,7 +6,7 @@
 
 =====================================
 Auteur .............: Jean Monos
-Mise à jour.........: 26/02/2020
+Mise à jour.........: 29/02/2020
 Licence ............: CC By SA
 Cible ..............: Atari St(e)
 Compilateur ........: GCC
@@ -29,6 +29,9 @@ Happy St est en licence CC BY SA. (Autorisé dans les projets commerciaux)
 ------------------
 2 : Mise à jour
 ------------------
+*29/02/2020 
+	Ajout du background color dans le draw_text
+
 * 26/02/2020
 	Mise à jour du data_load en utilisant la structure prévus à cette effet du _dta.
 

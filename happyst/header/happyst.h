@@ -1,13 +1,14 @@
 // ****************************************************************
 // * Nom ................ Happy St                                *
 // * Programmeur ........ Jean Monos                              *
-// * Data mise à jour.... 26/02/2020                              *
+// * Data mise à jour.... 29/02/2020                              *
 // * Fonction ........... Fonction dev pour Atari Ste GCC mint    *
 // * Licence ............ CC-BY-SA                                *
 // ****************************************************************
 
 
 /*
+  29/02/2020 : Ajout du background color dans le draw_text
   25/02/2020 : Le Load Data peut calculer automatiquement la taille du fichier chargé avant l'envois dans le buffer. (-1)
   17/02/2020 : Ajout du chargement de fichier "Data" dans un buffer choisis.
   16/02/2020 : Contrôle si le fichier pi est ouvert
@@ -40,7 +41,7 @@
   // charge un fichier dans le buffer de votre choix. Si size = -1 alors c'est le fichier entier qui est copier
   void load_data(char* source,char* destination,long size); 
 
-  void draw_text(unsigned char position_x,unsigned char position_y,char* texte,unsigned char couleur); // Affiche un text
+  void draw_text(unsigned char position_x,unsigned char position_y,char* texte,unsigned char couleur, unsigned char bakckground_color); // Affiche un text
   void draw_error(int id_error); // Afficher les erreurs
 
 

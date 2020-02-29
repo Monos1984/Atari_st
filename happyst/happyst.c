@@ -1,7 +1,7 @@
 // ****************************************************************
 // * Nom ................ Happy St                                *
 // * Programmeur ........ Jean Monos                              *
-// * Data mise à jour.... 26/02/2020                              *
+// * Data mise à jour.... 29/02/2020                              *
 // * Fonction ........... Fonction dev pour Atari Ste GCC mint    *
 // * Licence ............ CC-BY-SA                                *
 // ****************************************************************
@@ -10,9 +10,7 @@
 // ====================
 // * Fichier includes *
 // ====================
-
 #include "header/happyst.h"
-
 
 // ==================================
 // * Declaration des variables glob *
@@ -21,7 +19,6 @@ long* Save_Ecran_Phys;
 long* Save_Ecran_Log;
 int   Save_Ecran_Mode_Video;
 short Save_Buffer_Palette[16];
-
 
 // ===================
 // * Bip Clavier Off *
@@ -51,10 +48,6 @@ void clavier_on()
 { 
   CONTERM |= 0x01;
 }
-
-
-
-
 
 // ================
 // * save_init_st *
@@ -125,19 +118,16 @@ void load_data(char* source,char* destination,long size)
       // -------------------------------
       // * preparation des données dta *
       // -------------------------------
-    //  Fsetdta(buffer_dta);
+      //  Fsetdta(buffer_dta);
       Fsetdta(&dta);
-    Fsfirst(source,0);
+      Fsfirst(source,0);
 
       // ----------------------------------
       // * Recuperer la taille du fichier *
       // ----------------------------------
    
-  //    size = *(buffer_dta+26)*1024+*(buffer_dta+27)*512+*(buffer_dta+28)*256+*(buffer_dta+29);
- size = dta.dta_size;    
+      size = dta.dta_size;    
 
-
- //  size = buffer_dta[26]*1024+buffer_dta[27]*512+buffer_dta[28]*256+buffer_dta[29];
     }
 
     // ----------------------------------------------
@@ -154,11 +144,7 @@ void load_data(char* source,char* destination,long size)
     draw_error(f_handles);
   }
 
-
 }
-
-
-
 
 // ================
 // * Load Picture *
@@ -167,7 +153,6 @@ void load_picture(char* name)
 {
   signed int f_handles;
   unsigned char picture_buffer[32034];
-
 
   // -------------------------
   // * Chargement de l'image *
@@ -180,7 +165,6 @@ void load_picture(char* name)
   // -------------------------------
   // * Placer les donnés en buffer *
   // -------------------------------
-  // Fread(f_handles,32034,picture_buffer);
   Fread(f_handles,32034,picture_buffer);
   // ---------------------
   // * Fermer le fichier *
@@ -199,9 +183,8 @@ void load_picture(char* name)
   }
   else
   {
-     
+    
     draw_error(f_handles);
-
   }
 
 
@@ -216,9 +199,8 @@ void draw_error(int id_error)
 
     switch (id_error)
     {
-
-      case -33 :  draw_text(0,0,"Fichier Non trouver",1); break;
-      case -34 :  draw_text(0,0,"Chemin non trouver",1); break;
+      case -33 :  draw_text(0,0,"Fichier Non trouver",1,0); break;
+      case -34 :  draw_text(0,0,"Chemin non trouver",1,0); break;
     }
 
 
@@ -248,9 +230,10 @@ short get_keyboard()
 // ====================
 // * Afficher du text *
 // ====================
-void draw_text(unsigned char position_x,unsigned char position_y,char* texte,unsigned char couleur)
+void draw_text(unsigned char position_x,unsigned char position_y,char* texte,unsigned char couleur, unsigned char bakckground_color)
 {
-  printf( CURS_LOC, 32+position_y, 32+position_x ); fflush(stdout);
-  printf(CHAR_COLOR , couleur);fflush(stdout);
+  printf( CURS_LOC, 32+position_y, 32+position_x ); 
+  printf(CHAR_COLOR , couleur);
+  printf(BG_COLOR, bakckground_color);fflush(stdout);
   Cconws(texte);
 }
